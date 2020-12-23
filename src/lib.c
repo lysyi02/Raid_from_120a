@@ -19,9 +19,7 @@
 
 /**
 Функція makeGist: .
-
-*/
-/* Возвращает количество самого частого символа в тексте */
+/* Returning amount of the most frequent character in text (Возвращает количество самого частого символа в тексте) */
 int most_common(int frequency[ASCII_END], int call) {
   int max = frequency[1];
   for(int i = ASCII_START; i < ASCII_END; i++) {
@@ -42,8 +40,9 @@ int already_checked(int N) {
   return 0;
 }
 
-/* Считаем сколько символов в тексте, записываем в словарь вхождений
-  @param stream указатель на файл с текстом
+/* Сount how many characters are in the text, write it into the dictionary of entries
+ (Считаем сколько символов в тексте, записываем в словарь вхождений)
+  @param stream pointer to file with text (указатель на файл с текстом)
 */
 void count_symbols(FILE *stream) {
   while (!feof(stream)) {
@@ -55,8 +54,8 @@ void count_symbols(FILE *stream) {
   }
 }
 
-/* Функция для вывода в консоль
-  @param start @param fin - с какого по какое число выводить символы
+/* Function for output(Функция для вывода)
+  @param start @param fin - from which number to display characters (с какого по какое число выводить символы)
 */
 void output(int start, int fin) {
   for (int i = start; i < fin; i++) {
@@ -75,18 +74,18 @@ float get_percent(int num) {
 }
 
 
-/* Функция для вывода инфы о частоте встречи заданого типа символов
-  @param command - команда - тип проверяемых символов
+/* Function for displaying info about the frequency of occurrence of a given type of characters (Функция для вывода инфы о частоте встречи заданого типа символов)
+  @param command - Command - type of checked symbols(команда - тип проверяемых символов)
 */
 void symbols_freq(char command) {
-  if (command == 'e') { //англ буквы
+  if (command == 'e') { //english letters(англ буквы)
     output('a', 'z'+1);
-  } else if (command == 's') { //небукв. символы
+  } else if (command == 's') { //non-alphabetical symbols(небукв. символы)
     output(ASCII_START, 'a');
     output('z'+1, ASCII_END);
-  } else if ( command == 'r') { //русские буквы
+  } else if ( command == 'r') { //russian letters(русские буквы)
     printf("Russian language is not avaliable");
-  } else { //неправильная комманда
+  } else { //Invalid command(неправильная комманда)
     printf("Invalid input");
   }
 }

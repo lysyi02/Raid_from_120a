@@ -23,13 +23,39 @@
 */
 
 int main() {
+/*Открытие файла*/
+  FILE *stream;
+  if ((stream = fopen("test.htm", "rt"))==NULL) {
+    /* Если не открывается - выходим из программы */
+    printf("Cannot open file.\n");
+    return 1;
+  }
 
-        char top_fife_symbols[] = "asdfg";
-        float percentage_of_occurrence[] = {25.0f, 10.5f, 9.8f, 9.0f, 0.1f};
-        int width = 33;
-        int height = 10;
-        char filler = 'X';
-        draw_histogram(top_fife_symbols, percentage_of_occurrence, width, height, filler);
-        return 0;
+  /* Обнуление словаря вхождений*/
+  memset(frequency, 0, ASCII_END * sizeof(unsigned));
+
+  /* Заполнение словаря вхождений*/
+  count_symbols(stream);
+
+  /* Вывод частоты для англ. букв*/
+  symbols_freq('e');
+
+  printf("\n");
+
+  /* Вывод частоты для небукв. символов*/
+  symbols_freq('s');
+
+  float percentage_of_occurrence[5] = {0, 0, 0, 0, 0};
+  for(int i = 0; i < 5; i++){
+      percentage_of_occurrence[i] = get_percent(most_common(frequency, i));
+  }
+
+  int width = 127;
+  int height = 10;
+  char filler = 'X';
+
+  draw_histogram(top_five_symbols, percentage_of_occurrence, width, height, filler);
+
+  return 0;
 }
 

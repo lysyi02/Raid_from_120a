@@ -149,7 +149,6 @@ draw_histogram(char top_fife_symbols[5], float percentage_of_occurrence[5], int 
                 }
                 printf("\n");
         } else {
-                char test[] = "------------------------------->";
                 printf("Error: Слишком маленькая ширина гистограммы\n");
         }
         free(indents_between_indicators);

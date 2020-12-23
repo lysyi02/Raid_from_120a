@@ -1,7 +1,4 @@
 #include "lib.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
 
 /**
  * @file main.c
@@ -17,6 +14,14 @@
  * @param  - ;
  * @param  - ;
  */
+
+int frequency[ASCII_END];
+
+char top_five_symbols[5] = {0, 0, 0, 0, 0};
+
+/* Общее кол-ва проверенных символов */
+int text_length = 0;
+
 
 /**
 Функція main: задає масив, його розміри та значення і передає все до функції findNumb.

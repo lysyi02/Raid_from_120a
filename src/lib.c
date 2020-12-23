@@ -17,20 +17,13 @@
  * @param  - ;
  */
 
-int frequency[ASCII_END];
-
-char top_five_symbols[5] = {0, 0, 0, 0, 0};
-
-/* Ammount of checked symbols(Общее кол-ва проверенных символов) */
-int text_length = 0;
-
 /**
 Функція makeGist: .
 /* Returning amount of the most frequent character in text (Возвращает количество самого частого символа в тексте) */
-int most_common(int frequency[ASCII_END], int call) {
+int most_common(int *frequency, int call, char *top_five_symbols) {
   int max = frequency[1];
   for(int i = ASCII_START; i < ASCII_END; i++) {
-    if(frequency[i] > max && !already_checked(i)){
+    if(frequency[i] > max && !already_checked(i, top_five_symbols)){
       max = frequency[i];
       top_five_symbols[call] = i;
     }
@@ -38,7 +31,7 @@ int most_common(int frequency[ASCII_END], int call) {
   return max;
 }
 
-int already_checked(int N) {
+int already_checked(int N, char *top_five_symbols) {
   for(int i = 0; i < 5; i++) {
     if( N == top_five_symbols[i] ) {
       return 1;
@@ -64,35 +57,49 @@ void count_symbols(FILE *stream) {
 /* Function for output(Функция для вывода)
   @param start @param fin - from which number to display characters (с какого по какое число выводить символы)
 */
-void output(int start, int fin) {
+int count_symbols(FILE *stream, int *frequency) {
+  int text_length = 0;
+  while (!feof(stream)) {
+    char tmp = fgetc(stream);
+    if( ASCII_START <= tmp && tmp <= ASCII_END ) {
+      text_length++;
+      frequency[tolower(tmp)] ++;
+    }
+  }
+  return text_length;
+}
+
+/* Функция для вывода в консоль
+  @param start @param fin - с какого по какое число выводить символы
+*/
+void output(int start, int fin, int *frequency, int text_length) {
   for (int i = start; i < fin; i++) {
     if (frequency[i]) {
       printf("Символ ");
       printf("%c", i);
       printf(" : ");
-      printf("%f", get_percent(frequency[i]));
+      printf("%f", get_percent(frequency[i], text_length));
       printf("%c\n", '%');
     }
   }
 }
 
-float get_percent(int num) {
+float get_percent(int num, int text_length) {
   return (float) num / text_length * 100;
 }
-
 
 /* Function for displaying info about the frequency of occurrence of a given type of characters (Функция для вывода инфы о частоте встречи заданого типа символов)
   @param command - Command - type of checked symbols(команда - тип проверяемых символов)
 */
-void symbols_freq(char command) {
-  if (command == 'e') { //english letters(англ буквы)
-    output('a', 'z'+1);
-  } else if (command == 's') { //non-alphabetical symbols(небукв. символы)
-    output(ASCII_START, 'a');
-    output('z'+1, ASCII_END);
-  } else if ( command == 'r') { //russian letters(русские буквы)
+void symbols_freq(char command, int* frequency, int text_length) {
+  if (command == 'e') { //англ буквы
+    output('a', 'z'+1, frequency, text_length);
+  } else if (command == 's') { //небукв. символы
+    output(ASCII_START, 'a', frequency, text_length);
+    output('z'+1, ASCII_END, frequency, text_length);
+  } else if ( command == 'r') { //русские буквы
     printf("Russian language is not avaliable");
-  } else { //Invalid command(неправильная комманда)
+  } else { //неправильная комманда
     printf("Invalid input");
   }
 }

@@ -1,3 +1,6 @@
+#ifndef RAID_FROM_120A_LIB_H
+#define RAID_FROM_120A_LIB_H
+
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
@@ -12,8 +15,6 @@
 * @version 1.0
 */
 
-#ifndef RAID_FROM_120A_LIB_H
-#define RAID_FROM_120A_LIB_H
 
 void
 draw_histogram(char top_fife_symbols[5], float percentage_of_occurrence[5], int histogram_width, int histogram_height,

@@ -17,6 +17,13 @@
  * @param  - ;
  */
 
+int frequency[ASCII_END];
+
+char top_five_symbols[5] = {0, 0, 0, 0, 0};
+
+/* Ammount of checked symbols(Общее кол-ва проверенных символов) */
+int text_length = 0;
+
 /**
 Функція makeGist: .
 /* Returning amount of the most frequent character in text (Возвращает количество самого частого символа в тексте) */

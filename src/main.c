@@ -14,40 +14,40 @@
  * @param  - ;
  * @param  - ;
  */
-
+/* Frequency table(Таблица частот) */
 int frequency[ASCII_END];
 
 char top_five_symbols[5] = {0, 0, 0, 0, 0};
 
-/* Общее кол-ва проверенных символов */
+/* Ammount of checked symbols(Общее кол-ва проверенных символов) */
 int text_length = 0;
 
 
 /**
-Функція main: задає масив, його розміри та значення і передає все до функції findNumb.
+The main: function specifies the array, its size and value, and passes everything to the function findNumb.
 */
 
 int main() {
-/*Открытие файла*/
+/*Opening file (Открытие файла)*/
   FILE *stream;
   if ((stream = fopen("test.htm", "rt"))==NULL) {
-    /* Если не открывается - выходим из программы */
+    /* If doesn't open - exit from programm (Если не открывается - выходим из программы) */
     printf("Cannot open file.\n");
     return 1;
   }
 
-  /* Обнуление словаря вхождений*/
+  /* Resetting the dictionary of entries(Обнуление словаря вхождений) */
   memset(frequency, 0, ASCII_END * sizeof(unsigned));
 
-  /* Заполнение словаря вхождений*/
+  /* Feeling the dictionary of entries(Заполнение словаря вхождений) */
   count_symbols(stream);
 
-  /* Вывод частоты для англ. букв*/
+  /* Output for frequency of english letters(Вывод частоты для англ. букв) */
   symbols_freq('e');
 
   printf("\n");
 
-  /* Вывод частоты для небукв. символов*/
+  /* Output for non-alphabetical symbols (Вывод частоты для небукв. символов) */
   symbols_freq('s');
 
   float percentage_of_occurrence[5] = {0, 0, 0, 0, 0};

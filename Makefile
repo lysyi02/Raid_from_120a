@@ -1,7 +1,7 @@
 targets = main.bin
 CC = clang
-C_OPTS = -std=gnu11 -pedantic -g -Wall -I./src -lm src/lib.c
-
+C_OPTS = -std=gnu11 -pedantic -g -Wall -I./src src/lib.c -lm
+ 
 all: clean prep compile
 
 clean:

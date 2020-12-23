@@ -21,6 +21,76 @@
 Функція makeGist: .
 
 */
+/* Возвращает количество самого частого символа в тексте */
+int most_common(int frequency[ASCII_END], int call) {
+  int max = frequency[1];
+  for(int i = ASCII_START; i < ASCII_END; i++) {
+    if(frequency[i] > max && !already_checked(i)){
+      max = frequency[i];
+      top_five_symbols[call] = i;
+    }
+  }
+  return max;
+}
+
+int already_checked(int N) {
+  for(int i = 0; i < 5; i++) {
+    if( N == top_five_symbols[i] ) {
+      return 1;
+    }
+  }
+  return 0;
+}
+
+/* Считаем сколько символов в тексте, записываем в словарь вхождений
+  @param stream указатель на файл с текстом
+*/
+void count_symbols(FILE *stream) {
+  while (!feof(stream)) {
+    char tmp = fgetc(stream);
+    if( ASCII_START <= tmp && tmp <= ASCII_END ) {
+      text_length++;
+      frequency[tolower(tmp)] ++;
+    }
+  }
+}
+
+/* Функция для вывода в консоль
+  @param start @param fin - с какого по какое число выводить символы
+*/
+void output(int start, int fin) {
+  for (int i = start; i < fin; i++) {
+    if (frequency[i]) {
+      printf("Символ ");
+      printf("%c", i);
+      printf(" : ");
+      printf("%f", get_percent(frequency[i]));
+      printf("%c\n", '%');
+    }
+  }
+}
+
+float get_percent(int num) {
+  return (float) num / text_length * 100;
+}
+
+
+/* Функция для вывода инфы о частоте встречи заданого типа символов
+  @param command - команда - тип проверяемых символов
+*/
+void symbols_freq(char command) {
+  if (command == 'e') { //англ буквы
+    output('a', 'z'+1);
+  } else if (command == 's') { //небукв. символы
+    output(ASCII_START, 'a');
+    output('z'+1, ASCII_END);
+  } else if ( command == 'r') { //русские буквы
+    printf("Russian language is not avaliable");
+  } else { //неправильная комманда
+    printf("Invalid input");
+  }
+}
+
 void
 draw_histogram(char top_fife_symbols[5], float percentage_of_occurrence[5], int histogram_width, int histogram_height,
                char filler) {
@@ -204,19 +274,4 @@ int calculate_count_of_steps_for_output_weight(int height_weight_step, float wei
                 else count_of_steps++;
         }
 
-}
-
-int five_max(int *arr, int A) {
-        int max = *arr;
-        for (int i = 1; i < A; i++) {
-                if (*(arr + i) > max) {
-                        max = *(arr + i);
-                }
-        }
-        for (int i = 0; i < A; i++) {
-                if (*(arr + i) == max) {
-                        *(arr + i) = 0;
-                }
-        }
-        return max;
 }

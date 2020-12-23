@@ -5,7 +5,7 @@
 
 /**
  * @file main.c
- * @brief Сформувати частотний словник для всіх символів в файлі.
+ * @brief Create a dictionary of frequencies for all characters in file.
  * @author КІТ-120а.
  * @date 22-dec-2020
  * @version 1.0
@@ -23,6 +23,7 @@
 */
 
 int main() {
+
         char top_fife_symbols[] = "asdfg";
         float percentage_of_occurrence[] = {25.0f, 10.5f, 9.8f, 9.0f, 0.1f};
         int width = 33;

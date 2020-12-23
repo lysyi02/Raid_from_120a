@@ -6,7 +6,7 @@
 
 /**
 * @file lib.h
-* @brief Попереднє задання функцій.
+* @brief Preset function.
 * @author КІТ-120а.
 * @date 22-dec-2020
 * @version 1.0
@@ -27,5 +27,7 @@ void calculate_indents_between_indicators(int *indents_between_indicators, int i
 
 int calculate_count_of_steps_for_output_weight(int height_weight_step, float weight_of_percent,
                                                float maximal_value_for_percent);
+
+int five_max(int *arr, int A);
 
 #endif //RAID_FROM_120A_LIB_H

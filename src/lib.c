@@ -2,7 +2,7 @@
 
 /**
 * @file lib.c
-* @brief Реалізвція функцій для файлу main.c.
+* @brief Function implementation for file main.c.
 * @author КІТ-120а.
 * @date 22-dec-2020
 * @version 1.0
@@ -207,3 +207,17 @@ int calculate_count_of_steps_for_output_weight(int height_weight_step, float wei
 
 }
 
+int five_max(int *arr, int A) {
+        int max = *arr;
+        for (int i = 1; i < A; i++) {
+                if (*(arr + i) > max) {
+                        max = *(arr + i);
+                }
+        }
+        for (int i = 0; i < A; i++) {
+                if (*(arr + i) == max) {
+                        *(arr + i) = 0;
+                }
+        }
+        return max;
+}

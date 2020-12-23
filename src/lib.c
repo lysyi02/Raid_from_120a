@@ -44,19 +44,6 @@ int already_checked(int N, char *top_five_symbols) {
  (Считаем сколько символов в тексте, записываем в словарь вхождений)
   @param stream pointer to file with text (указатель на файл с текстом)
 */
-void count_symbols(FILE *stream) {
-  while (!feof(stream)) {
-    char tmp = fgetc(stream);
-    if( ASCII_START <= tmp && tmp <= ASCII_END ) {
-      text_length++;
-      frequency[tolower(tmp)] ++;
-    }
-  }
-}
-
-/* Function for output(Функция для вывода)
-  @param start @param fin - from which number to display characters (с какого по какое число выводить символы)
-*/
 int count_symbols(FILE *stream, int *frequency) {
   int text_length = 0;
   while (!feof(stream)) {
@@ -68,6 +55,10 @@ int count_symbols(FILE *stream, int *frequency) {
   }
   return text_length;
 }
+/* Function for output(Функция для вывода)
+  @param start @param fin - from which number to display characters (с какого по какое число выводить символы)
+*/
+
 
 /* Функция для вывода в консоль
   @param start @param fin - с какого по какое число выводить символы

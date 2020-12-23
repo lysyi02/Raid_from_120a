@@ -20,19 +20,19 @@
 * @version 1.0
 */
 
-void count_symbols(FILE *stream);
+int count_symbols(FILE *stream, int *frequency);
 
-void output(int start, int fin);
+void output(int start, int fin, int *frequency, int text_length);
 
-void symbols_freq(char command);
+void symbols_freq(char command, int* frequency, int text_length);
 
-float get_percent(int num);
+float get_percent(int num, int text_length);
 
-int most_common(int frequency[ASCII_END], int call);
+int most_common(int frequency[ASCII_END], int call, char *top_five_symbols);
 
-int already_checked(int N);
+int already_checked(int N, char *top_five_symbols);
 
-void draw_histogram(char top_fife_symbols[5], float percentage_of_occurrence[5], int histogram_width, int histogram_height, char filler);
+void draw_histogram(char top_five_symbols[5], float percentage_of_occurrence[5], int histogram_width, int histogram_height, char filler);
 
 float max_value_in_array(float *array, size_t array_size);
 

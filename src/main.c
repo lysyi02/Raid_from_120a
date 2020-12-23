@@ -22,6 +22,7 @@ The main: function specifies the array, its size and value, and passes everythin
 */
 
 int main() {
+  char top_five_symbols[5] = {0, 0, 0, 0, 0};
 /*Opening file (Открытие файла)*/
   FILE *stream;
   if ((stream = fopen("test.htm", "rt"))==NULL) {
@@ -31,22 +32,23 @@ int main() {
   }
 
   /* Resetting the dictionary of entries(Обнуление словаря вхождений) */
+  int frequency[ASCII_END];
   memset(frequency, 0, ASCII_END * sizeof(unsigned));
 
   /* Feeling the dictionary of entries(Заполнение словаря вхождений) */
-  count_symbols(stream);
-
+  int text_length = count_symbols(stream, frequency);
+  
   /* Output for frequency of english letters(Вывод частоты для англ. букв) */
-  symbols_freq('e');
+  symbols_freq('e', frequency, text_length);
 
   printf("\n");
 
   /* Output for non-alphabetical symbols (Вывод частоты для небукв. символов) */
-  symbols_freq('s');
+  symbols_freq('s', frequency, text_length);
 
   float percentage_of_occurrence[5] = {0, 0, 0, 0, 0};
   for(int i = 0; i < 5; i++){
-      percentage_of_occurrence[i] = get_percent(most_common(frequency, i));
+      percentage_of_occurrence[i] = get_percent(most_common(frequency, i, top_five_symbols),text_length);
   }
 
   int width = 127;

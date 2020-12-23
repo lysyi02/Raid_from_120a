@@ -100,8 +100,6 @@ draw_histogram(char top_fife_symbols[5], float percentage_of_occurrence[5], int 
         if (maximal_value_for_percent > 100) maximal_value_for_percent = 100.0f;
         float weight_of_percent = maximal_value_for_percent / (histogram_height - 1);
 
-        int right_indent = 1;
-        int left_indent = right_indent;
         int *indents_between_indicators = (int *) calloc(5, sizeof(int));
 
         if (histogram_width >= minimal_width) {

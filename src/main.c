@@ -1,7 +1,4 @@
 #include "lib.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
 
 /**
  * @file main.c
